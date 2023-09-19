@@ -1,0 +1,4 @@
+{
+    "python.autoComplete.extraPaths": ["d:/Uni/S2Y1/FIT1008/23-S2-A1/src/backend"],
+    "python.analysis.extraPaths": ["d:/Uni/S2Y1/FIT1008/23-S2-A1/src/backend"]
+  }
