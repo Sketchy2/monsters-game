@@ -2,10 +2,10 @@ from __future__ import annotations
 from enum import auto
 from typing import Optional, TYPE_CHECKING
 
-from base_enum import BaseEnum
-from monster_base import MonsterBase
-from random_gen import RandomGen
-from helpers import get_all_monsters
+from .base_enum import BaseEnum
+from .monster_base import MonsterBase
+from .random_gen import RandomGen
+from .helpers import get_all_monsters
 
 from data_structures.referential_array import ArrayR
 from data_structures.stack_adt import ArrayStack

@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from random_gen import RandomGen
-from team import MonsterTeam
-from battle import Battle
+from .random_gen import RandomGen
+from .team import MonsterTeam
+from .battle import Battle
 
-from elements import Element, EffectivenessCalculator
+from .elements import Element, EffectivenessCalculator
 
 from data_structures.referential_array import ArrayR
 from data_structures.bset import BSet

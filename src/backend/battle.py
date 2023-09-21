@@ -2,10 +2,8 @@ from __future__ import annotations
 from enum import auto
 from typing import Optional
 
-from base_enum import BaseEnum
-from team import MonsterTeam
-
-from team import MonsterTeam
+from .base_enum import BaseEnum
+from .team import MonsterTeam
 
 from data_structures.referential_array import ArrayR
 

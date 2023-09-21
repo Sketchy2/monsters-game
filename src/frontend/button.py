@@ -1,5 +1,6 @@
 import pygame
-from settings import SCREEN_HEIGHT, SCREEN_WIDTH
+from typing import List
+from .settings import SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Button:
     def __init__(self, x, y, scale: float, image: str):
@@ -18,7 +19,18 @@ class Button:
     
     def centre(self):
         self.x = (SCREEN_WIDTH - self.new_width) // 2
-        self.y = (SCREEN_HEIGHT - self.new_height) // 2 
+        self.y = (SCREEN_HEIGHT - self.new_height) // 2
+
+    def distribute_h(buttons: List['Button'], space: int):
+        total_width = sum([x.new_width for x in buttons])
+        total_spacing = space * (len(buttons) - 1)  # 50 px spacing between each button
+        start_x = (SCREEN_WIDTH - total_width - total_spacing) // 2  # Integer division for pixel alignment
+
+        x_position = start_x
+        for button in buttons:
+            button.x = x_position
+            x_position += button.new_width + space  # Move to the next position, considering the 50 px spacing
+
         
     def is_over(self, pos):
         x, y = pos

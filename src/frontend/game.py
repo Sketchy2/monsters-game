@@ -1,11 +1,8 @@
-import sys
-sys.path.append("d:/Uni/S2Y1/FIT1008/23-S2-A1/src/backend")
-
 import pygame
-from settings import SCREEN_WIDTH, SCREEN_HEIGHT
-from player import Player
-from button import Button
-from team import MonsterTeam
+from .settings import SCREEN_WIDTH, SCREEN_HEIGHT
+from .player import Player
+from .button import Button
+from ..backend.team import MonsterTeam
 
 
 class Game:
@@ -13,13 +10,13 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption('Walmart Pokemon')
         self.clock = pygame.time.Clock()
-        self.background = pygame.transform.scale(pygame.image.load("D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\Images\\mainMenuBackground.jpg"),(SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.background = pygame.transform.scale(pygame.image.load("Images\\mainMenuBackground.jpg"),(SCREEN_WIDTH, SCREEN_HEIGHT))
         self.current_screen = "main_menu"
         self.running = True
 
     def main_menu(self):
         #initilising main_menu
-        self.BstartGame = Button((SCREEN_WIDTH) // 2, (SCREEN_HEIGHT) // 2, 0.5, image="D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\Images\\start_button.png")
+        self.BstartGame = Button((SCREEN_WIDTH) // 2, (SCREEN_HEIGHT) // 2, 0.5, image="Images\\start_button.png")
         self.BstartGame.centre()
         pygame.display.flip()
 
@@ -32,8 +29,8 @@ class Game:
 
     def selecting_team(self):
         # initilising selecting_team
-        self.Brandom = Button((SCREEN_WIDTH) * 0.2, (SCREEN_HEIGHT) // 2, 0.5, image="D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\Images\\random_button.png")
-        self.Bmanual = Button((SCREEN_WIDTH) * 0.6, (SCREEN_HEIGHT) // 2, 0.5, image="D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\Images\\manual_button.png")
+        self.Brandom = Button((SCREEN_WIDTH) * 0.2, (SCREEN_HEIGHT) // 2, 0.5, image="Images\\random_button.png")
+        self.Bmanual = Button((SCREEN_WIDTH) * 0.6, (SCREEN_HEIGHT) // 2, 0.5, image="Images\\manual_button.png")
         pygame.display.flip()
 
         #handling events
@@ -45,9 +42,10 @@ class Game:
     
     def selecting_formation(self):
         #initilising selecting_formation
-        self.Bfront = Button((SCREEN_WIDTH) * 0.05, (SCREEN_HEIGHT) // 2, 0.5, image="D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\Images\\random_button.png")
-        self.Bback = Button(((SCREEN_WIDTH) * 0.05) + 675, (SCREEN_HEIGHT) // 2, 0.5, image="D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\Images\\random_button.png")
-        self.Boptimise = Button(((SCREEN_WIDTH) * 0.05) + 1350, (SCREEN_HEIGHT) // 2, 0.5, image="D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\Images\\random_button.png")
+        self.Bfront = Button((SCREEN_WIDTH), (SCREEN_HEIGHT) // 2, 0.5, image="Images\\random_button.png")
+        self.Bback = Button((SCREEN_WIDTH), (SCREEN_HEIGHT) // 2, 0.5, image="Images\\random_button.png")
+        self.Boptimise = Button((SCREEN_WIDTH), (SCREEN_HEIGHT) // 2, 0.5, image="Images\\random_button.png")
+        Button.distribute_h([self.Bfront,self.Bback,self.Boptimise], 150)
         pygame.display.flip()
 
         #handling events
@@ -59,7 +57,7 @@ class Game:
 
     def show_team(self):
         #initilsiing show_team
-        self.Bplay = Button((SCREEN_WIDTH) * 0.05, (SCREEN_HEIGHT) // 2, 0.5, image="D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\Images\\random_button.png")
+        self.Bplay = Button((SCREEN_WIDTH) * 0.05, (SCREEN_HEIGHT) // 2, 0.5, image="Images\\random_button.png")
         pygame.display.flip()
 
         #handling events
