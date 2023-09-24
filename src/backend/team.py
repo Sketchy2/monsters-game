@@ -44,13 +44,13 @@ class MonsterTeam:
         LEVEL = auto()
 
     TEAM_LIMIT = 6
-    def __init__(self, team_mode: TeamMode, selection_mode, **kwargs) -> None:
+    def __init__(self, team_mode: TeamMode, selection_mode, leader: MonsterBase, **kwargs) -> None:
         """Initialising tings here you know pre simple init (pun intended)
         
         Anyways, complexity worst case is: O(j) where j is the time complexity of selection_randomly/manually/provided.
         Best case is: O(1) #this is if the incorrect input is chosen thus stopping t
         """
-
+        self.leader = leader
         self.team_mode = team_mode
         self.desc = True #This is a variable that will switch from descending to ascending  based on the optimise special() function.
         
@@ -227,14 +227,18 @@ class MonsterTeam:
             self.desc = True
 
     def select_randomly(self):
-        team_size = RandomGen.randint(1, self.TEAM_LIMIT)
+        #Adding the chosen leader
+        self.add_to_team(self.leader)
+        self.add_to_teamSAVE(self.leader)
+
+
         monsters = get_all_monsters()
         n_spawnable = 0
         for x in range(len(monsters)):
             if monsters[x].can_be_spawned():
                 n_spawnable += 1
 
-        for _ in range(team_size):
+        for _ in range(self.TEAM_LIMIT-1):
             spawner_index = RandomGen.randint(0, n_spawnable-1)
             cur_index = -1
             for x in range(len(monsters)):
@@ -246,7 +250,7 @@ class MonsterTeam:
                         self.add_to_teamSAVE(monsters[x]())
                         break   
             else:
-                raise ValueError("Spawning logic failed.")
+                raise ValueError("Spawning logic failed.")\
 
     def select_manually(self):
         """

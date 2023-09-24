@@ -3,15 +3,18 @@ from typing import List
 from .settings import SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Visual:
-    def __init__(self, x, y, scale: float, image: str):
+
+    created_visuals = {}
+    def __init__(self, x, y, scale: float, menu, image: str):
+        self.created_visuals.setdefault(menu, []).append(self)
         self.x = x
         self.y = y
 
 
         image = pygame.image.load(image)
         width, height = image.get_size()
-        self.new_width = int(width * 0.5)
-        self.new_height = int(height * 0.5)
+        self.new_width = int(width * scale)
+        self.new_height = int(height * scale)
         self.image = pygame.transform.scale(image, (self.new_width,self.new_height))
         
     def draw(self, screen):
