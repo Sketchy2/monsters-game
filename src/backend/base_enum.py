@@ -12,3 +12,6 @@ class BaseEnum(Enum):
         if self.__class__.__name__ == __value.__class__.__name__:
             return self.value == __value.value
         return False
+    
+    def hashing(self) -> str:
+        return self.name

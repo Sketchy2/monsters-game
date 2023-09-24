@@ -2,7 +2,7 @@ from __future__ import annotations
 import yaml
 from typing import TYPE_CHECKING
 import sys
-sys.path.append("d:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\")
+sys.path.append("..")
 
 from data_structures.referential_array import ArrayR
 
@@ -14,7 +14,7 @@ _monsters: ArrayR[MonsterBase] = None
 
 
 def MonsterBaseFactory(name, description, evolution, element, simple_stats, complex_stats, can_be_spawned) -> type[MonsterBase]:
-    from monster_base import MonsterBase
+    from .monster_base import MonsterBase
     return type(name, (MonsterBase, ), {
         "get_name": classmethod(lambda s: name),
         "get_description": classmethod(lambda s: description),
@@ -32,9 +32,9 @@ def get_all_monsters():
     return _monsters
 
 def _make_all_monster_classes():
-    from stats import SimpleStats, ComplexStats
+    from .stats import SimpleStats, ComplexStats
     global _monsters
-    with open("D:\\Uni\\S2Y1\\FIT1008\\23-S2-A1\\assets\\monsters.yaml", "r") as f:
+    with open("assets\\monsters.yaml", "r") as f:
         monsters_yaml = yaml.safe_load(f)
     _monsters = ArrayR(len(monsters_yaml))
     idx = 0

@@ -1,11 +1,10 @@
 from __future__ import annotations
 import sys
-sys.path.append("d:/Uni/S2Y1/FIT1008/23-S2-A1")
 
 from enum import auto
 from typing import Optional
 
-from base_enum import BaseEnum
+from .base_enum import BaseEnum
 
 from data_structures.referential_array import ArrayR
 
@@ -130,11 +129,10 @@ class EffectivenessCalculator:
 
     @classmethod
     def make_singleton(cls):
-        cls.instance = EffectivenessCalculator.from_csv("D:\\Uni\S2Y1\\FIT1008\\23-S2-A1\\assets\\type_effectiveness.csv")
+        cls.instance = EffectivenessCalculator.from_csv("assets\\type_effectiveness.csv")
 
 EffectivenessCalculator.make_singleton()
 
 
 if __name__ == "__main__":
-    print(EffectivenessCalculator.instance.index)
-    print(EffectivenessCalculator.get_effectiveness(Element.FIRE, Element.GRASS))
+    pass

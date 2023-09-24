@@ -2,8 +2,8 @@ from __future__ import annotations
 import abc
 import math
 
-from stats import Stats
-from elements import EffectivenessCalculator, Element
+from .stats import Stats
+from .elements import EffectivenessCalculator, Element
 
 
 """PLEASE READ THE README.md FILE FOR INFORMATION REGARDING COMPELXITY ANALYSIS"""
