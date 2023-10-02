@@ -84,6 +84,21 @@ class Game:
                 break
             self.draw()
 
+    def battle(self):
+        self.Tfriendly_current_monster = text((SCREEN_WIDTH) *0.65, (SCREEN_HEIGHT) *0.55, "Bulbasur" ,Game.menu.BATTLE.hashing(),60)
+        self.Tenemy_current_monster = text((SCREEN_WIDTH) *0.0714, (SCREEN_HEIGHT) *0.1426, "monkey",Game.menu.BATTLE.hashing(),60)  
+        # 
+        #   
+        pygame.display.flip()
+
+        #handling events
+        while self.running:
+            self.handle_events()
+            if self.current_screen != Game.menu.BATTLE:
+                break
+            self.draw()
+
+
     def handle_events(self):
         for event in pygame.event.get():
             pos = pygame.mouse.get_pos()
@@ -127,20 +142,28 @@ class Game:
                             self.friendly_team = MonsterTeam(self.selection_chosen,MonsterTeam.SelectionMode.RANDOM,self.leader)
                             self.enemy_team = MonsterTeam(MonsterTeam.TeamMode.FRONT,MonsterTeam.SelectionMode.RANDOM, Shockserpent)
                 
-                elif self.current_scrren == Game.menu.DISPLAYTEAM:
+                elif self.current_screen == Game.menu.DISPLAYTEAM:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if self.Bstartmatch.is_over(pos):
-                            self.current_scrren = Game.menu.BATTLE
+                            self.current_screen = Game.menu.BATTLE
 
     def draw(self):
-        self.screen.blit(self.background,(0,0))
-        for i in Visual.created_visuals[self.current_screen.hashing()]:
-            i.draw(self.screen)
+        if self.current_screen == Game.menu.BATTLE:
+            self.screen.blit(pygame.transform.scale(pygame.image.load("Images\\blank_battle.png"),(SCREEN_WIDTH, SCREEN_HEIGHT)),(0,0))
+        else:
+            self.screen.blit(self.background,(0,0))
+        try:
+            for i in Visual.created_visuals[self.current_screen.hashing()]:
+                i.draw(self.screen)
+        except:
+            pass
         try:
             for i in text.created_texts[self.current_screen.hashing()]:
                 i.draw(self.screen)
         except:
             pass
+
+        self.coordinate_calculator()
 
         pygame.display.flip()
 
@@ -154,9 +177,31 @@ class Game:
                 self.selecting_leader()
             elif self.current_screen == Game.menu.DISPLAYTEAM:
                 self.display_team()
-            elif self.current_scrren == Game.menu.BATTLE:
+            elif self.current_screen == Game.menu.BATTLE:
                 self.battle()
             else:
                 self.handle_events()
                 self.draw()
                 self.clock.tick(60)
+
+
+
+
+
+#TROUBLE SHOOTTING
+
+    def coordinate_calculator(self):
+        x,y = pygame.mouse.get_pos()
+
+        #calcuate pecentage relative to screen
+        x_percent = (x / SCREEN_WIDTH) * 100
+        y_percent = (y / SCREEN_HEIGHT) * 100
+
+        #create text surfaces 
+        coord_text = text(SCREEN_WIDTH*0.9,SCREEN_HEIGHT*0.9,f'Coordinates: ({x}, {y})',None)
+        percent_text = text(SCREEN_WIDTH*0.9,SCREEN_HEIGHT*0.85,f'Percentage: ({x_percent:.2f}%, {y_percent:.2f}%)', None)
+
+        coord_text.draw(self.screen)
+        percent_text.draw(self.screen)
+        # self.screen.blit(coord_text, (SCREEN_WIDTH - coord_text.get_width() - 10, SCREEN_HEIGHT - coord_text.get_height() - 10))
+        # self.screen.blit(percent_text, (SCREEN_WIDTH - percent_text.get_width() - 10, SCREEN_HEIGHT - percent_text.get_height() - coord_text.get_height() - 20))

@@ -7,11 +7,11 @@ from .settings import SCREEN_HEIGHT, SCREEN_WIDTH
 class text:
 
     created_texts = {}
-    def __init__(self, x, y, text, menu):
+    def __init__(self, x, y, text, menu, size=40):
         self.x = x
         self.y = y
 
-        font = pygame.font.Font('freesansbold.ttf', 32)
+        font = pygame.font.Font('assets\\fonts\\pixel_font.ttf', size)
         self.msg = font.render(text,True,(0, 255, 0), (0, 0, 255))
 
         self.textRect = self.msg.get_rect()
